@@ -27,46 +27,135 @@
 <li><p>一个由其他种类的流组成的序列</p>
 </li>
 <li><p>其他数据源，如internet连接</p>
+<p><strong>InputStream类型</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">类</th>
+<th align="center">功能</th>
+<th align="center">构造器参数/如何使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ByteArrayInputStream</td>
+<td align="center">允许将内存的缓冲区当作InputStream使用</td>
+<td align="center">缓冲区，字节将从中取出/作为一种数据源</td>
+</tr>
+<tr>
+<td align="center">StreamBufferInputStream</td>
+<td align="center">将String转化成InputStream</td>
+<td align="center">字符串。底层使用StringBuffer/作为一种数据源</td>
+</tr>
+<tr>
+<td align="center">FileInputStream</td>
+<td align="center">用于从文件中读取信息</td>
+<td align="center">字符串、表示文件名、文件或者FileDescription对象/作为一种数据源</td>
+</tr>
+<tr>
+<td align="center">PipedInputStream</td>
+<td align="center">产生用于写入如相关PipedOutputStream的数据。实现管道化的概念</td>
+<td align="center">PipedOutPutStream/作为多线程中数据源</td>
+</tr>
+<tr>
+<td align="center">SequenceInputStream</td>
+<td align="center">将两个或多个InputStream转换成单一InputStream</td>
+<td align="center">两个InputStream对象或一个容纳InputStream的容器Enumeration</td>
+</tr>
+<tr>
+<td align="center">FilterInputStream</td>
+<td align="center">抽象类，作为“装饰器”的接口。其中，“装饰器“</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>​<strong>OutputStream类型</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">类</th>
+<th align="center">功能</th>
+<th align="center">构造器参数/如何使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ByteArrayOutputStream</td>
+<td align="center">在内存中创建缓冲区。所有送往“流”的数据都要放置在此缓冲区</td>
+<td align="center">缓冲区初始化尺寸/用于指定数据的目的地</td>
+</tr>
+<tr>
+<td align="center">FileOutputStream</td>
+<td align="center">用于将信息写入文件</td>
+<td align="center">字符串，表示文件名、文件或FileDescription对象 /指定数据的目的地</td>
+</tr>
+<tr>
+<td align="center">PipedOutpustStream</td>
+<td align="center">任何写入其中的信息都会自动作为相关PipedInputStream的输出。实现“管道化”概念</td>
+<td align="center">PipedInputStream指定用于多线程的数据的目的地</td>
+</tr>
+<tr>
+<td align="center">FilterInputstream</td>
+<td align="center">抽象类，作为“装饰器“的接口。其中，”装饰器“为其他OutputStream提供有用功能</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p> <strong>FilterInputStream类型</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">类</th>
+<th align="center">功能</th>
+<th align="center">构造器参数/使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">DataInputStream</td>
+<td align="center">与DataOutputStream搭配使用，可以从流中读取基本数据类型(int,char,long)</td>
+<td align="center">InputStream/包含用于读取基本类型数据的全部接口</td>
+</tr>
+<tr>
+<td align="center">BufferedBufferedInputStream（已弃用）</td>
+<td align="center">使用缓冲区</td>
+<td align="center">InputStream，可以指定缓冲区大小/本质上不提供接口，只不过是像进程中添加缓冲区所必须的。与接口对象搭配使用</td>
+</tr>
+<tr>
+<td align="center">LineNumberInputStream（已弃用）</td>
+<td align="center">跟踪输入流中的行号；可调用getLineNumber()和setLineNumber()</td>
+<td align="center">InputStream/仅增加了行号，因此可能要与接口对象搭配使用</td>
+</tr>
+<tr>
+<td align="center">PushbackInputStream</td>
+<td align="center">具有”能弹出一个字节的”缓冲区“。因此可以将读到最后一个字符回退</td>
+<td align="center">InputStream/通常作为编译器的扫描器，我们可能永远也不会用到</td>
+</tr>
+</tbody></table>
+<p><strong>FilterOutputStream类型</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">类</th>
+<th align="center">功能</th>
+<th align="center">构造器/使用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">DataOutputStream</td>
+<td align="center">与DataOutputStream搭配使用，向流中写入基本类型数据(int,char,long)</td>
+<td align="center">OutputStream/包含用于写入基本类型数据的全部接口</td>
+</tr>
+<tr>
+<td align="center">PrintStream</td>
+<td align="center">用于产生格式化输出。其中DataOutStream处理数据的存储，PrintStream处理显示</td>
+<td align="center">OutputStream/可以用boolean值指示是否在每次换行时清空缓冲区应该是对OutputStream对象的“final”封装。可能会经常使用到它</td>
+</tr>
+<tr>
+<td align="center">BufferedOutputStream</td>
+<td align="center">使用它以避免每次发送数据时都要进行实际的写操作。代表“使用缓冲区”。可以调用flush()清空缓冲区</td>
+<td align="center">OutputStream/可以指定缓冲区大小，本质上并不提供接口，只不过是向进程中添加缓冲区所必需的。与接口对象搭配</td>
+</tr>
+</tbody></table>
+<p><strong>Reader和writer</strong><br>与InputStream和OutputStream面向字节操作不同，Reader和Writer提供了兼容Unicode和面向字符IO功能</p>
 </li>
 </ol>
-<pre><code>**InputStream类型**
-
-|           类            |                            功能                             |                     构造器参数/如何使用                      |
-| :---------------------: | :---------------------------------------------------------: | :----------------------------------------------------------: |
-|  ByteArrayInputStream   |            允许将内存的缓冲区当作InputStream使用            |            缓冲区，字节将从中取出/作为一种数据源             |
-| StreamBufferInputStream |                  将String转化成InputStream                  |         字符串。底层使用StringBuffer/作为一种数据源          |
-|     FileInputStream     |                    用于从文件中读取信息                     | 字符串、表示文件名、文件或者FileDescription对象/作为一种数据源 |
-|    PipedInputStream     | 产生用于写入如相关PipedOutputStream的数据。实现管道化的概念 |             PipedOutPutStream/作为多线程中数据源             |
-|   SequenceInputStream   |        将两个或多个InputStream转换成单一InputStream         |  两个InputStream对象或一个容纳InputStream的容器Enumeration   |
-|    FilterInputStream    |         抽象类，作为“装饰器”的接口。其中，“装饰器“          |                                                              |
-
-​**OutputStream类型**
-
-|          类           |                           功能                           |          构造器参数/如何使用          |
-| :-------------------: | :------------------------------------------------------: |:-----------------------------------: |
-| ByteArrayOutputStream |在内存中创建缓冲区。所有送往“流”的数据都要放置在此缓冲区 | 缓冲区初始化尺寸/用于指定数据的目的地 |
-| FileOutputStream       |用于将信息写入文件                                           | 字符串，表示文件名、文件或FileDescription对象 /指定数据的目的地 |
-| PipedOutpustStream    |任何写入其中的信息都会自动作为相关PipedInputStream的输出。实现“管道化”概念|PipedInputStream指定用于多线程的数据的目的地|
-| FilterInputstream     |抽象类，作为“装饰器“的接口。其中，”装饰器“为其他OutputStream提供有用功能  |                                       |
-
- **FilterInputStream类型**
-|类|功能|构造器参数/使用|
-| :-----------------------------: | :------------------------: | :--------------------: |
-|DataInputStream|与DataOutputStream搭配使用，可以从流中读取基本数据类型(int,char,long)|InputStream/包含用于读取基本类型数据的全部接口|
-|BufferedBufferedInputStream（已弃用）|使用缓冲区|InputStream，可以指定缓冲区大小/本质上不提供接口，只不过是像进程中添加缓冲区所必须的。与接口对象搭配使用|
-|LineNumberInputStream（已弃用）|跟踪输入流中的行号；可调用getLineNumber()和setLineNumber()|InputStream/仅增加了行号，因此可能要与接口对象搭配使用|
-|PushbackInputStream|具有”能弹出一个字节的”缓冲区“。因此可以将读到最后一个字符回退|InputStream/通常作为编译器的扫描器，我们可能永远也不会用到|
-
-**FilterOutputStream类型**
-
-|类|功能|构造器/使用|
-| :----: | :----: |:----:|
-|DataOutputStream|与DataOutputStream搭配使用，向流中写入基本类型数据(int,char,long)|OutputStream/包含用于写入基本类型数据的全部接口|
-|PrintStream|用于产生格式化输出。其中DataOutStream处理数据的存储，PrintStream处理显示|OutputStream/可以用boolean值指示是否在每次换行时清空缓冲区应该是对OutputStream对象的“final”封装。可能会经常使用到它|
-|BufferedOutputStream|使用它以避免每次发送数据时都要进行实际的写操作。代表“使用缓冲区”。可以调用flush()清空缓冲区|OutputStream/可以指定缓冲区大小，本质上并不提供接口，只不过是向进程中添加缓冲区所必需的。与接口对象搭配|
-
-**Reader和writer**
-与InputStream和OutputStream面向字节操作不同，Reader和Writer提供了兼容Unicode和面向字符IO功能</code></pre>]]></content>
+]]></content>
   </entry>
   <entry>
     <title>java中的正则表达式</title>
